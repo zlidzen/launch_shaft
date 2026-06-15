@@ -1,34 +1,19 @@
-type HeaderProps = {
-  activePage: 'home' | 'rocket' | 'about'
-  onNavigate: (page: 'home' | 'rocket' | 'about') => void
-}
+import { NavLink } from 'react-router-dom'
 
-const Header = ({ activePage, onNavigate }: HeaderProps) => (
+const Header = () => (
   <header className="header">
     <div className="container header-inner">
       <h1 className="logo">Launch Shaft</h1>
       <nav className="nav" aria-label="Primary">
-        <button
-          type="button"
-          className={activePage === 'home' ? 'nav-button active' : 'nav-button'}
-          onClick={() => onNavigate('home')}
-        >
+        <NavLink to="/" end className={({ isActive }) => (isActive ? 'nav-link active' : 'nav-link')}>
           Home
-        </button>
-        <button
-          type="button"
-          className={activePage === 'rocket' ? 'nav-button active' : 'nav-button'}
-          onClick={() => onNavigate('rocket')}
-        >
+        </NavLink>
+        <NavLink to="/rocket" className={({ isActive }) => (isActive ? 'nav-link active' : 'nav-link')}>
           Let&apos;s rocket it
-        </button>
-        <button
-          type="button"
-          className={activePage === 'about' ? 'nav-button active' : 'nav-button'}
-          onClick={() => onNavigate('about')}
-        >
+        </NavLink>
+        <NavLink to="/about" className={({ isActive }) => (isActive ? 'nav-link active' : 'nav-link')}>
           About
-        </button>
+        </NavLink>
       </nav>
     </div>
   </header>
