@@ -3,6 +3,33 @@ import RocketNav from '../components/rocketNav/RocketNav'
 
 type RocketSection = 'how-it-works' | 'comparison-table'
 
+type ComparisonRow = {
+  type: string
+  damage: number
+  maxVelocity: number
+  explosionRadius: number
+  explosionVelocity: number
+}
+
+const comparisonRows: ComparisonRow[] = [
+  { type: '*Rocket', damage: 117, maxVelocity: 2250, explosionRadius: 20, explosionVelocity: 150 },
+  { type: '*Javelin Rocket', damage: 135, maxVelocity: 3000, explosionRadius: 16, explosionVelocity: 165 },
+  { type: '*Rage Rocket', damage: 150, maxVelocity: 1875, explosionRadius: 24, explosionVelocity: 135 },
+  { type: '*Caldary Rocket', damage: 140, maxVelocity: 2350, explosionRadius: 19, explosionVelocity: 155 },
+  { type: '*Light Missile', damage: 90, maxVelocity: 6000, explosionRadius: 50, explosionVelocity: 80 },
+  { type: '*Precision Light Missile', damage: 105, maxVelocity: 7000, explosionRadius: 35, explosionVelocity: 95 },
+  { type: '*Fury Light Missile', damage: 120, maxVelocity: 5000, explosionRadius: 60, explosionVelocity: 70 },
+  { type: '*Caldary Light Missile', damage: 112, maxVelocity: 6500, explosionRadius: 45, explosionVelocity: 85 },
+  { type: '*Heavy Missile', damage: 150, maxVelocity: 4500, explosionRadius: 125, explosionVelocity: 80 },
+  { type: '*Precision Heavy Missile', damage: 165, maxVelocity: 5250, explosionRadius: 90, explosionVelocity: 95 },
+  { type: '*Fury Heavy Missile', damage: 180, maxVelocity: 3900, explosionRadius: 145, explosionVelocity: 70 },
+  { type: '*Caldary Heavy Missile', damage: 172, maxVelocity: 4800, explosionRadius: 115, explosionVelocity: 85 },
+  { type: '*Heavy Assault Missile', damage: 150, maxVelocity: 2750, explosionRadius: 60, explosionVelocity: 105 },
+  { type: '*Javelin Heavy Assault Missile', damage: 135, maxVelocity: 3300, explosionRadius: 48, explosionVelocity: 120 },
+  { type: '*Rage Heavy Assault Missile', damage: 180, maxVelocity: 2400, explosionRadius: 72, explosionVelocity: 90 },
+  { type: '*Caldary Heavy Assault Missile', damage: 168, maxVelocity: 2950, explosionRadius: 55, explosionVelocity: 110 },
+]
+
 const Rocket = () => {
   const [activeRocketSection, setActiveRocketSection] = useState<RocketSection>('how-it-works')
 
@@ -106,36 +133,22 @@ const Rocket = () => {
                 <thead>
                   <tr>
                     <th>Type</th>
-                    <th>Best against</th>
-                    <th>Range</th>
-                    <th>Notes</th>
+                    <th>Damage</th>
+                    <th>Max.Velosity</th>
+                    <th>Explosion Radius</th>
+                    <th>Explosion Velosity</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>Light Missile</td>
-                    <td>Small targets</td>
-                    <td>Long</td>
-                    <td>Good application, low raw damage</td>
-                  </tr>
-                  <tr>
-                    <td>Heavy Missile</td>
-                    <td>Medium targets</td>
-                    <td>Long</td>
-                    <td>Balanced damage and range</td>
-                  </tr>
-                  <tr>
-                    <td>Heavy Assault Missile</td>
-                    <td>Close-range brawling</td>
-                    <td>Short</td>
-                    <td>High damage, strong in scrappy fights</td>
-                  </tr>
-                  <tr>
-                    <td>Cruise Missile</td>
-                    <td>Large targets</td>
-                    <td>Very long</td>
-                    <td>Designed for long-range battleship combat</td>
-                  </tr>
+                  {comparisonRows.map((row) => (
+                    <tr key={row.type}>
+                      <td>{row.type}</td>
+                      <td>{row.damage}</td>
+                      <td>{row.maxVelocity}</td>
+                      <td>{row.explosionRadius}</td>
+                      <td>{row.explosionVelocity}</td>
+                    </tr>
+                  ))}
                 </tbody>
               </table>
             </div>

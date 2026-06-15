@@ -369,7 +369,7 @@ button:hover {
 .comparison-table {
   width: 100%;
   border-collapse: collapse;
-  min-width: 560px;
+  min-width: 820px;
 }
 
 .comparison-table th,

@@ -48,6 +48,7 @@
       "value": 300
     },
     {
+     "display_name": "Maximum Velocity",
       "attribute_id": 37,
       "value": 2250
     },
@@ -109,6 +110,7 @@
       "value": 0
     },
     {
+      "display_name": "Kinetic damage",
       "attribute_id": 117,
       "value": 33
     },
