@@ -346,6 +346,31 @@ button:hover {
   margin-bottom: 0;
 }
 
+.ship-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+  margin-top: 1.25rem;
+}
+
+.ship-card {
+  background: rgba(15, 23, 42, 0.72);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 1rem;
+  box-shadow: 0 12px 24px rgba(2, 6, 23, 0.2);
+}
+
+.ship-card h3 {
+  margin: 0 0 0.4rem;
+  color: var(--color-primary);
+}
+
+.ship-card p {
+  margin: 0;
+  color: var(--color-muted);
+}
+
 .damage-em {
   color: #60a5fa;
 }

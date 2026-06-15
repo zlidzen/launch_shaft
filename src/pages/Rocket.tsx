@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import RocketNav from '../components/rocketNav/RocketNav'
 
-type RocketSection = 'how-it-works' | 'comparison-table'
+type RocketSection = 'how-it-works' | 'comparison-table' | 'frigates' | 'destroyers' | 'cruisers'
 
 type ComparisonRow = {
   type: string
@@ -30,14 +30,55 @@ const comparisonRows: ComparisonRow[] = [
   { type: '*Caldary Heavy Assault Missile', damage: 168, maxVelocity: 2950, explosionRadius: 55, explosionVelocity: 110 },
 ]
 
+type ShipEntry = {
+  name: string
+  role: string
+}
+
+const shipLists: Record<'frigates' | 'destroyers' | 'cruisers', ShipEntry[]> = {
+  frigates: [
+    { name: 'Kestrel', role: 'Classic Caldari missile frigate' },
+    { name: 'Breacher', role: 'Brawling rocket frigate' },
+    { name: 'Condor', role: 'Fast tackle missile frigate' },
+    { name: 'Hookbill', role: 'Navy frigate with strong missile pressure' },
+    { name: 'Worm', role: 'Pirate frigate with strong drone and missile support' },
+    { name: 'Garmur', role: 'Long-range missile kiting frigate' },
+  ],
+  destroyers: [
+    { name: 'Corax', role: 'Caldari missile destroyer' },
+    { name: 'Talwar', role: 'Minmatar missile destroyer' },
+    { name: 'Jackdaw', role: 'Tactical destroyer with missile options' },
+    { name: 'Heretic', role: 'Interdictor that can fit missile launchers' },
+    { name: 'Sunesis', role: 'Flexible pirate destroyer hull' },
+  ],
+  cruisers: [
+    { name: 'Caracal', role: 'Standard missile cruiser' },
+    { name: 'Caracal Navy Issue', role: 'Upgraded missile cruiser' },
+    { name: 'Osprey Navy Issue', role: 'Missile cruiser with strong range' },
+    { name: 'Cerberus', role: 'Heavy missile HAC' },
+    { name: 'Sacrilege', role: 'Heavy assault missile HAC' },
+    { name: 'Gila', role: 'Drone and missile cruiser with strong application' },
+  ],
+}
+
+const shipSectionTitles: Record<'frigates' | 'destroyers' | 'cruisers', string> = {
+  frigates: 'Frigates',
+  destroyers: 'Destroyers',
+  cruisers: 'Cruisers',
+}
+
 const Rocket = () => {
-  const [activeRocketSection, setActiveRocketSection] = useState<RocketSection>('how-it-works')
+  const [activeSection, setActiveSection] = useState<RocketSection>('how-it-works')
+  const activeShipSection =
+    activeSection === 'frigates' || activeSection === 'destroyers' || activeSection === 'cruisers'
+      ? activeSection
+      : null
 
   return (
     <section className="page page-rocket">
-      <RocketNav activeRocketSection={activeRocketSection} onSelectSection={setActiveRocketSection} />
+      <RocketNav activeSection={activeSection} onSelectSection={setActiveSection} />
       <div className="rocket-main">
-        {activeRocketSection === 'how-it-works' ? (
+        {activeSection === 'how-it-works' ? (
           <section className="rocket-panel">
             <h2>How it works</h2>
             <p>
@@ -125,7 +166,7 @@ const Rocket = () => {
           </section>
         ) : null}
 
-        {activeRocketSection === 'comparison-table' ? (
+        {activeSection === 'comparison-table' ? (
           <section className="rocket-panel">
             <h2>Comparison table</h2>
             <div className="table-wrapper" role="region" aria-label="Missile comparison table" tabIndex={0}>
@@ -151,6 +192,23 @@ const Rocket = () => {
                   ))}
                 </tbody>
               </table>
+            </div>
+          </section>
+        ) : null}
+
+        {activeShipSection ? (
+          <section className="rocket-panel">
+            <h2>{shipSectionTitles[activeShipSection]}</h2>
+            <p>
+              Examples of EVE Online ships in this class that can be fitted with rocket or missile launchers.
+            </p>
+            <div className="ship-grid">
+              {shipLists[activeShipSection].map((ship) => (
+                <article className="ship-card" key={ship.name}>
+                  <h3>{ship.name}</h3>
+                  <p>{ship.role}</p>
+                </article>
+              ))}
             </div>
           </section>
         ) : null}
