@@ -1,11 +1,15 @@
 /* == Base & Global == */
 :root {
   --font-main: "Inter", system-ui, sans-serif;
-  --color-bg: #fafafa;
-  --color-text: #222;
-  --color-primary: #0077ff;
-  --color-border: #e5e5e5;
-  --radius: 10px;
+  --color-bg: #060b16;
+  --color-surface: rgba(15, 23, 42, 0.9);
+  --color-surface-elevated: rgba(17, 24, 39, 0.96);
+  --color-text: #e5eefc;
+  --color-muted: #9aa7c7;
+  --color-primary: #7dd3fc;
+  --color-border: rgba(148, 163, 184, 0.22);
+  --color-shadow: rgba(2, 6, 23, 0.45);
+  --radius: 12px;
   --transition: 0.25s ease;
 }
 
@@ -20,14 +24,23 @@ html, body {
   background: var(--color-bg);
   color: var(--color-text);
   line-height: 1.6;
+  color-scheme: dark;
+}
+
+body {
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top, rgba(56, 189, 248, 0.16), transparent 38%),
+    linear-gradient(180deg, #0b1220 0%, #060b16 100%);
 }
 
 .header {
-  background: #fff;
+  background: rgba(6, 11, 22, 0.82);
   border-bottom: 1px solid var(--color-border);
   position: sticky;
   top: 0;
   z-index: 100;
+  backdrop-filter: blur(18px);
 }
 
 .header-inner {
@@ -42,6 +55,7 @@ html, body {
   font-size: 1.5rem;
   color: var(--color-primary);
   font-weight: 600;
+  letter-spacing: 0.02em;
 }
 
 .nav {
@@ -51,7 +65,7 @@ html, body {
 
 a {
   text-decoration: none;
-  color: var(--color-text);
+  color: var(--color-muted);
   transition: color var(--transition);
 }
 
@@ -67,7 +81,7 @@ a {
   min-height: 100vh;
   width: 100vw;
   padding: 1.5rem;
-  background: var(--color-bg);
+  background: transparent;
   display: flex;
   justify-content: center;
 }
@@ -84,13 +98,20 @@ h2 {
 }
 
 button {
-  background: var(--color-primary);
-  color: #fff;
+  background: rgba(125, 211, 252, 0.12);
+  color: var(--color-primary);
   border-radius: var(--radius);
-  border: none;
+  border: 1px solid rgba(125, 211, 252, 0.2);
   cursor: pointer;
   padding: 0.6rem 1.2rem;
   font-size: 1rem;
+  transition: transform var(--transition), background var(--transition), border-color var(--transition);
+}
+
+button:hover {
+  background: rgba(125, 211, 252, 0.2);
+  border-color: rgba(125, 211, 252, 0.35);
+  transform: translateY(-1px);
 }
 
 .posts {
@@ -101,17 +122,17 @@ button {
 }
 
 .post-card {
-  background: #fff;
+  background: var(--color-surface);
   border-radius: var(--radius);
   border: 1px solid var(--color-border);
   padding: 1.5rem;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 12px 30px var(--color-shadow);
   transition: transform var(--transition), box-shadow var(--transition);
 }
 
 .post-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 18px 36px rgba(2, 6, 23, 0.55);
 }
 
 .post-card h3 {
@@ -120,7 +141,7 @@ button {
 }
 
 .post-card p {
-  color: var(--color-text);
+  color: var(--color-muted);
   font-size: 0.95rem;
 }
 
@@ -135,14 +156,20 @@ button {
   padding: 0.6rem 1rem;
   margin-bottom: 2rem;
   border: 1px solid var(--color-border);
+  background: var(--color-surface-elevated);
+  color: var(--color-text);
   border-radius: var(--radius);
   font-size: 1rem;
   font-family: var(--font-main);
-  transition: border var(--transition), box-shadow var(--transition);
+  transition: border var(--transition), box-shadow var(--transition), background var(--transition);
 }
 
 .search-input:focus {
   border-color: var(--color-primary);
-  box-shadow: 0 0 0 3px rgba(0, 119, 255, 0.15);
+  box-shadow: 0 0 0 3px rgba(125, 211, 252, 0.16);
   outline: none;
+}
+
+.search-input::placeholder {
+  color: var(--color-muted);
 }
