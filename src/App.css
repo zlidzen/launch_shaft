@@ -304,6 +304,39 @@ button:hover {
   text-align: left;
 }
 
+.rocket-nav-label {
+  margin: 0 0 0.25rem;
+  padding: 0 0.25rem;
+  color: var(--color-muted);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.rocket-nav-parent {
+  font-weight: 700;
+}
+
+.rocket-subnav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin: -0.25rem 0 0.5rem;
+  padding-left: 0.75rem;
+  border-left: 1px solid rgba(125, 211, 252, 0.18);
+}
+
+.rocket-nav-child {
+  font-size: 0.95rem;
+  padding-left: 0.9rem;
+}
+
+.rocket-nav-child.active {
+  background: rgba(125, 211, 252, 0.18);
+  border-color: rgba(125, 211, 252, 0.38);
+}
+
 .rocket-main {
   min-height: 420px;
   border-radius: var(--radius);
@@ -311,6 +344,41 @@ button:hover {
   background: rgba(15, 23, 42, 0.4);
   padding: 1.5rem;
   color: var(--color-muted);
+}
+
+.rocket-panel h2 {
+  margin-top: 0;
+}
+
+.rocket-panel p:last-child {
+  margin-bottom: 0;
+}
+
+.table-wrapper {
+  overflow-x: auto;
+}
+
+.comparison-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 560px;
+}
+
+.comparison-table th,
+.comparison-table td {
+  border-bottom: 1px solid var(--color-border);
+  padding: 0.85rem 0.75rem;
+  text-align: left;
+  vertical-align: top;
+}
+
+.comparison-table th {
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+.comparison-table tbody tr:hover {
+  background: rgba(125, 211, 252, 0.06);
 }
 
 .page-about {
@@ -351,5 +419,13 @@ button:hover {
 
   .rocket-nav-item {
     text-align: center;
+  }
+
+  .rocket-subnav {
+    margin-left: 0.5rem;
+  }
+
+  .comparison-table {
+    min-width: 0;
   }
 }
