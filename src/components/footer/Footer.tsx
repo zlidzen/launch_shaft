@@ -6,7 +6,7 @@ const Footer = () => {
       <div className="footer-inner">
         <p className="footer-line">
           <a href="https://www.eveonline.com/" target="_blank" rel="noreferrer">
-            Official EVE Online
+            EVE Online
           </a>
         </p>
         <p className="footer-line">
