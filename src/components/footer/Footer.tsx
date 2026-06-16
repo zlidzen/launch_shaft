@@ -15,6 +15,11 @@ const Footer = () => {
           </a>
         </p>
         <p className="footer-line">
+          <a href="https://developers.eveonline.com/api-explorer" target="_blank" rel="noreferrer">
+            API EVE Online
+          </a>
+        </p>
+        <p className="footer-line">
           <a href="https://zkillboard.com/" target="_blank" rel="noreferrer">
             zkillboard
           </a>

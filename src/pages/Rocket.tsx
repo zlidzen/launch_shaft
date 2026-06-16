@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import RocketNav from '../components/rocketNav/RocketNav'
 
-type RocketSection = 'how-it-works' | 'comparison-table' | 'frigates' | 'destroyers' | 'cruisers'
+type RocketSection = 'how-it-works' | 'comparison-table' | 'frigates' | 'destroyers' | 'cruisers' | 'battle-cruisers'
 
 type ComparisonRow = {
   type: string
@@ -31,46 +31,56 @@ const comparisonRows: ComparisonRow[] = [
 ]
 
 type ShipEntry = {
+  id: number
   name: string
   role: string
 }
 
-const shipLists: Record<'frigates' | 'destroyers' | 'cruisers', ShipEntry[]> = {
+const shipLists: Record<'frigates' | 'destroyers' | 'cruisers' | 'battle-cruisers', ShipEntry[]> = {
   frigates: [
-    { name: 'Kestrel', role: 'Classic Caldari missile frigate' },
-    { name: 'Breacher', role: 'Brawling rocket frigate' },
-    { name: 'Condor', role: 'Fast tackle missile frigate' },
-    { name: 'Hookbill', role: 'Navy frigate with strong missile pressure' },
-    { name: 'Worm', role: 'Pirate frigate with strong drone and missile support' },
-    { name: 'Garmur', role: 'Long-range missile kiting frigate' },
+    { id: 602, name: 'Kestrel', role: 'Classic Caldari missile frigate' },
+    { id: 598, name: 'Breacher', role: 'Brawling rocket frigate' },
+    { id: 583, name: 'Condor', role: 'Fast tackle missile frigate' },
+    { id: 17619, name: 'Caldari Navy Hookbill', role: 'Navy frigate with strong missile pressure' },
+    { id: 17930, name: 'Worm', role: 'Pirate frigate with strong drone and missile support' },
+    { id: 33816, name: 'Garmur', role: 'Long-range missile kiting frigate' },
   ],
   destroyers: [
-    { name: 'Corax', role: 'Caldari missile destroyer' },
-    { name: 'Talwar', role: 'Minmatar missile destroyer' },
-    { name: 'Jackdaw', role: 'Tactical destroyer with missile options' },
-    { name: 'Heretic', role: 'Interdictor that can fit missile launchers' },
-    { name: 'Sunesis', role: 'Flexible pirate destroyer hull' },
+    { id: 32876, name: 'Corax', role: 'Caldari missile destroyer' },
+    { id: 32878, name: 'Talwar', role: 'Minmatar missile destroyer' },
+    { id: 34828, name: 'Jackdaw', role: 'Tactical destroyer with missile options' },
+    { id: 22452, name: 'Heretic', role: 'Interdictor that can fit missile launchers' },
+    { id: 42685, name: 'Sunesis', role: 'Flexible pirate destroyer hull' },
   ],
   cruisers: [
-    { name: 'Caracal', role: 'Standard missile cruiser' },
-    { name: 'Caracal Navy Issue', role: 'Upgraded missile cruiser' },
-    { name: 'Osprey Navy Issue', role: 'Missile cruiser with strong range' },
-    { name: 'Cerberus', role: 'Heavy missile HAC' },
-    { name: 'Sacrilege', role: 'Heavy assault missile HAC' },
-    { name: 'Gila', role: 'Drone and missile cruiser with strong application' },
+    { id: 621, name: 'Caracal', role: 'Standard missile cruiser' },
+    { id: 17634, name: 'Caracal Navy Issue', role: 'Upgraded missile cruiser' },
+    { id: 29340, name: 'Osprey Navy Issue', role: 'Missile cruiser with strong range' },
+    { id: 11993, name: 'Cerberus', role: 'Heavy missile HAC' },
+    { id: 12019, name: 'Sacrilege', role: 'Heavy assault missile HAC' },
+    { id: 17715, name: 'Gila', role: 'Drone and missile cruiser with strong application' },
+  ],
+  'battle-cruisers': [
+    { id: 24698, name: 'Drake', role: 'Armored missile battlecruiser' },
+    { id: 24702, name: 'Hurricane', role: 'Versatile missile battlecruiser' },
+    { id: 24696, name: 'Harbinger', role: 'Long-range missile battlecruiser' },
+    { id: 22446, name: 'Vulture', role: 'Fast missile battlecruiser' },
+    { id: 624, name: 'Maller', role: 'Shield-tanked hybrid cruiser with missile fits' },
+    { id: 17843, name: 'Vexor Navy Issue', role: 'Drone and missile support battlecruiser' },
   ],
 }
 
-const shipSectionTitles: Record<'frigates' | 'destroyers' | 'cruisers', string> = {
+const shipSectionTitles: Record<'frigates' | 'destroyers' | 'cruisers' | 'battle-cruisers', string> = {
   frigates: 'Frigates',
   destroyers: 'Destroyers',
   cruisers: 'Cruisers',
+  'battle-cruisers': 'Battle Cruisers',
 }
 
 const Rocket = () => {
   const [activeSection, setActiveSection] = useState<RocketSection>('how-it-works')
   const activeShipSection =
-    activeSection === 'frigates' || activeSection === 'destroyers' || activeSection === 'cruisers'
+    activeSection === 'frigates' || activeSection === 'destroyers' || activeSection === 'cruisers' || activeSection === 'battle-cruisers'
       ? activeSection
       : null
 
@@ -205,6 +215,13 @@ const Rocket = () => {
             <div className="ship-grid">
               {shipLists[activeShipSection].map((ship) => (
                 <article className="ship-card" key={ship.name}>
+                  {ship.id ? (
+                    <img
+                      className="ship-card-image"
+                      src={`https://images.evetech.net/types/${ship.id}/icon?size=128`}
+                      alt={`${ship.name} icon`}
+                    />
+                  ) : null}
                   <h3>{ship.name}</h3>
                   <p>{ship.role}</p>
                 </article>

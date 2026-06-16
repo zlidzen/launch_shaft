@@ -1,4 +1,4 @@
-type RocketSection = 'how-it-works' | 'comparison-table' | 'frigates' | 'destroyers' | 'cruisers'
+type RocketSection = 'how-it-works' | 'comparison-table' | 'frigates' | 'destroyers' | 'cruisers' | 'battle-cruisers'
 
 type RocketNavProps = {
   activeSection: RocketSection
@@ -48,6 +48,13 @@ const RocketNav = ({ activeSection, onSelectSection }: RocketNavProps) => {
           onClick={() => onSelectSection('cruisers')}
         >
           Cruisers
+        </button>
+        <button
+          type="button"
+          className={activeSection === 'battle-cruisers' ? 'rocket-nav-item rocket-nav-child active' : 'rocket-nav-item rocket-nav-child'}
+          onClick={() => onSelectSection('battle-cruisers')}
+        >
+          Battle Cruisers
         </button>
       </div>
 
