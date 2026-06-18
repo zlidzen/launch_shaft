@@ -1,6 +1,9 @@
-
-export default {
-  "inventory_types": [
+type Blueprint = {
+    id: number;
+    name: string;
+  };
+  
+const blueprints: Blueprint[] = [
     {
       "id": 949,
       "name": "Kestrel Blueprint"
@@ -126,4 +129,5 @@ export default {
       "name": "Inferno Light Missile Blueprint"
     }
   ]
-}
+
+  export default blueprints;

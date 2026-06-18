@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import RocketNav from '../components/rocketNav/RocketNav'
-import blueprintsData from '../../data/blueprints.js'
+import blueprintsData from '../../data/blueprints.ts'
 
 type RocketSection =
   | 'how-it-works'
@@ -260,7 +260,7 @@ const Rocket = () => {
             <h2>Recipes</h2>
             <p>Blueprint collection for missile-related ships and components.</p>
             <div className="blueprint-grid">
-              {blueprintsData.inventory_types.map((blueprint: { id: number; name: string }) => (
+              {blueprintsData.map((blueprint: { id: number; name: string }) => (
                 <article className="blueprint-card" key={blueprint.name}>
                   <img
                     className="blueprint-card-image"
