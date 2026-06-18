@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import RocketNav from '../components/rocketNav/RocketNav'
+import blueprintsData from '../../data/blueprints.js'
 
 type RocketSection =
   | 'how-it-works'
@@ -257,32 +258,18 @@ const Rocket = () => {
         {activeSection === 'manufacture-recipes' ? (
           <section className="rocket-panel">
             <h2>Recipes</h2>
-            <p>Common manufacture recipes for missile-related items and components.</p>
-            <div className="recipe-list">
-              <article className="recipe-card">
-                <h3>Rocket Launcher</h3>
-                <ul>
-                  <li>Blueprint: Rocket Launcher I</li>
-                  <li>Materials: 1x Construction Alloy, 3x Mechanic Parts, 2x Electronics</li>
-                  <li>Time: 1h 20m</li>
-                </ul>
-              </article>
-              <article className="recipe-card">
-                <h3>Light Missile Launcher</h3>
-                <ul>
-                  <li>Blueprint: Light Missile Launcher I</li>
-                  <li>Materials: 2x Construction Alloy, 5x Mechanic Parts, 3x Electronics</li>
-                  <li>Time: 2h 10m</li>
-                </ul>
-              </article>
-              <article className="recipe-card">
-                <h3>Rocket</h3>
-                <ul>
-                  <li>Blueprint: Rocket I</li>
-                  <li>Materials: 1x Pyroxeres, 2x Scordite, 1x Pyerite</li>
-                  <li>Time: 30m</li>
-                </ul>
-              </article>
+            <p>Blueprint collection for missile-related ships and components.</p>
+            <div className="blueprint-grid">
+              {blueprintsData.inventory_types.map((blueprint: { id: number; name: string }) => (
+                <article className="blueprint-card" key={blueprint.name}>
+                  <img
+                    className="blueprint-card-image"
+                    src={`https://images.evetech.net/types/${blueprint.id}/bp`}
+                    alt={`${blueprint.name} icon`}
+                  />
+                  <h3>{blueprint.name}</h3>
+                </article>
+              ))}
             </div>
           </section>
         ) : null}

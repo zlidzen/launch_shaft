@@ -1,6 +1,5 @@
 
-{
-
+export default {
   "inventory_types": [
     {
       "id": 949,
