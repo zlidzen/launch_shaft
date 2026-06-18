@@ -231,9 +231,11 @@ const Rocket = () => {
               or component ready for fitting.
             </p>
             <p>
-              The process is similar to missiles: you need the right blueprint, the right inputs, and the right production
-              environment. Production time and material efficiency are affected by your skills, rigs, and the structure where
-              you build.
+              0. You have nothing.
+              1. You have a blueprint copy or original blueprint.
+              2. You get all needed materials for manufacturing.
+              3. You find a structure or station with the required skills and run the manufacturing job.
+              * if you have a blueprint original you may create blueprint copy with better material efficiency or better production time.
             </p>
             <h3>Blueprints</h3>
             <p>
