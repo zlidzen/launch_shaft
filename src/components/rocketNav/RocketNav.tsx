@@ -1,4 +1,12 @@
-type RocketSection = 'how-it-works' | 'comparison-table' | 'frigates' | 'destroyers' | 'cruisers' | 'battle-cruisers'
+type RocketSection =
+  | 'how-it-works'
+  | 'comparison-table'
+  | 'manufacture-how-it-works'
+  | 'manufacture-recipes'
+  | 'frigates'
+  | 'destroyers'
+  | 'cruisers'
+  | 'battle-cruisers'
 
 type RocketNavProps = {
   activeSection: RocketSection
@@ -61,7 +69,32 @@ const RocketNav = ({ activeSection, onSelectSection }: RocketNavProps) => {
       <button type="button" className="rocket-nav-item">Modules</button>
       <button type="button" className="rocket-nav-item">PvE</button>
       <button type="button" className="rocket-nav-item">PvP</button>
-      <button type="button" className="rocket-nav-item">Manufacture</button>
+
+      <p className="rocket-nav-label">Manufacture</p>
+      <div className="rocket-subnav" aria-label="Manufacture subsections">
+        <button
+          type="button"
+          className={
+            activeSection === 'manufacture-how-it-works'
+              ? 'rocket-nav-item rocket-nav-child active'
+              : 'rocket-nav-item rocket-nav-child'
+          }
+          onClick={() => onSelectSection('manufacture-how-it-works')}
+        >
+          How it works
+        </button>
+        <button
+          type="button"
+          className={
+            activeSection === 'manufacture-recipes'
+              ? 'rocket-nav-item rocket-nav-child active'
+              : 'rocket-nav-item rocket-nav-child'
+          }
+          onClick={() => onSelectSection('manufacture-recipes')}
+        >
+          Recipes
+        </button>
+      </div>
     </aside>
   )
 }

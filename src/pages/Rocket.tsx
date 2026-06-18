@@ -1,7 +1,15 @@
 import { useState } from 'react'
 import RocketNav from '../components/rocketNav/RocketNav'
 
-type RocketSection = 'how-it-works' | 'comparison-table' | 'frigates' | 'destroyers' | 'cruisers' | 'battle-cruisers'
+type RocketSection =
+  | 'how-it-works'
+  | 'comparison-table'
+  | 'manufacture-how-it-works'
+  | 'manufacture-recipes'
+  | 'frigates'
+  | 'destroyers'
+  | 'cruisers'
+  | 'battle-cruisers'
 
 type ComparisonRow = {
   type: string
@@ -202,6 +210,79 @@ const Rocket = () => {
                   ))}
                 </tbody>
               </table>
+            </div>
+          </section>
+        ) : null}
+
+        {activeSection === 'manufacture-how-it-works' ? (
+          <section className="rocket-panel">
+            <h2>How it works</h2>
+             <p>
+              Based on{' '}
+              <a href="https://wiki.eveuniversity.org/Industry" target="_blank" rel="noopener noreferrer">
+                wiki.eveuniversity
+              </a>
+            </p>
+
+            <p>
+              Manufacturing in EVE is a multi-step process: research or copy a blueprint, acquire the required materials,
+              and run the job in a structure or station with the needed skills. The result is a finished module, ammo,
+              or component ready for fitting.
+            </p>
+            <p>
+              The process is similar to missiles: you need the right blueprint, the right inputs, and the right production
+              environment. Production time and material efficiency are affected by your skills, rigs, and the structure where
+              you build.
+            </p>
+            <h3>Blueprints</h3>
+            <p>
+              Blueprints define the item output, required materials, and manufacturing time. A blueprint copy costs less
+              than a faction or original blueprint, but it has a limited number of runs. Original blueprints have infinite
+              runs and can be researched for better efficiency.
+            </p>
+            <h3>Material efficiency</h3>
+            <p>
+              Material Efficiency (ME) reduces the number of components required. Higher ME saves minerals and materials,
+              making manufacture faster and cheaper. Fit the right skills and rigs to maximize efficiency for items you make
+              often.
+            </p>
+            <h3>Production efficiency</h3>
+            <p>
+              Production Efficiency (PE) reduces manufacturing time. Faster jobs free up industry slots and let you produce
+              more items per day. PE is especially valuable for large item runs or high-value products.
+            </p>
+          </section>
+        ) : null}
+
+        {activeSection === 'manufacture-recipes' ? (
+          <section className="rocket-panel">
+            <h2>Recipes</h2>
+            <p>Common manufacture recipes for missile-related items and components.</p>
+            <div className="recipe-list">
+              <article className="recipe-card">
+                <h3>Rocket Launcher</h3>
+                <ul>
+                  <li>Blueprint: Rocket Launcher I</li>
+                  <li>Materials: 1x Construction Alloy, 3x Mechanic Parts, 2x Electronics</li>
+                  <li>Time: 1h 20m</li>
+                </ul>
+              </article>
+              <article className="recipe-card">
+                <h3>Light Missile Launcher</h3>
+                <ul>
+                  <li>Blueprint: Light Missile Launcher I</li>
+                  <li>Materials: 2x Construction Alloy, 5x Mechanic Parts, 3x Electronics</li>
+                  <li>Time: 2h 10m</li>
+                </ul>
+              </article>
+              <article className="recipe-card">
+                <h3>Rocket</h3>
+                <ul>
+                  <li>Blueprint: Rocket I</li>
+                  <li>Materials: 1x Pyroxeres, 2x Scordite, 1x Pyerite</li>
+                  <li>Time: 30m</li>
+                </ul>
+              </article>
             </div>
           </section>
         ) : null}
