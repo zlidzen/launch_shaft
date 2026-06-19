@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import RocketNav from '../components/rocketNav/RocketNav'
 import blueprintsData from '../../data/blueprints.ts'
+// @ts-ignore - import raw JSONL via Vite
+import blueprintsJsonl from '../../data/eve-online-static-data/blueprints.jsonl?raw'
 
 type RocketSection =
   | 'how-it-works'
@@ -88,6 +90,24 @@ const shipSectionTitles: Record<'frigates' | 'destroyers' | 'cruisers' | 'battle
 
 const Rocket = () => {
   const [activeSection, setActiveSection] = useState<RocketSection>('how-it-works')
+  const parsedBlueprints = (() => {
+    try {
+      if (!blueprintsJsonl) return []
+      return blueprintsJsonl.trim().split('\n').map((line: string) => JSON.parse(line))
+    } catch (e) {
+      return []
+    }
+  })()
+
+  const MATERIAL_NAMES: Record<number, string> = {
+    34: 'Tritanium',
+    35: 'Pyerite',
+    36: 'Mexallon',
+    37: 'Isogen',
+    38: 'Nocxium',
+    39: 'Zydrine',
+    40: 'Megacyte',
+  }
   const activeShipSection =
     activeSection === 'frigates' || activeSection === 'destroyers' || activeSection === 'cruisers' || activeSection === 'battle-cruisers'
       ? activeSection
@@ -262,16 +282,46 @@ const Rocket = () => {
             <h2>Recipes</h2>
             <p>Blueprint collection for missile-related ships and components.</p>
             <div className="blueprint-grid">
-              {blueprintsData.map((blueprint: { id: number; name: string }) => (
-                <article className="blueprint-card" key={blueprint.name}>
-                  <img
-                    className="blueprint-card-image"
-                    src={`https://images.evetech.net/types/${blueprint.id}/bp`}
-                    alt={`${blueprint.name} icon`}
-                  />
-                  <h3>{blueprint.name}</h3>
-                </article>
-              ))}
+              {blueprintsData.map((blueprint: { id: number; name: string }) => {
+                const bpEntry = parsedBlueprints.find((b: any) => b.blueprintTypeID === blueprint.id)
+                const materials = bpEntry?.activities?.manufacturing?.materials ?? []
+
+                return (
+                  <article className="blueprint-card" key={blueprint.name}>
+                    <h3 className="blueprint-title">{blueprint.name}</h3>
+                    <div className="blueprint-card-body">
+                      <div className="image-column">
+                        <img
+                          className="blueprint-card-image"
+                          src={`https://images.evetech.net/types/${blueprint.id}/bp`}
+                          alt={`${blueprint.name} icon`}
+                        />
+                      </div>
+
+                      <div className="materials-column">
+                        <ul className="materials-list">
+                          {materials.length === 0 ? (
+                            <li className="materials-empty">No manufacturing materials listed</li>
+                          ) : (
+                            materials.map((m: any) => (
+                              <li key={m.typeID} className="material-item">
+                                <img
+                                  src={`https://images.evetech.net/types/${m.typeID}/icon?size=32`}
+                                  alt={`${MATERIAL_NAMES[m.typeID] ?? m.typeID} icon`}
+                                  className="material-icon"
+                                />
+                                <span className="material-name">{MATERIAL_NAMES[m.typeID] ?? `ID ${m.typeID}`}</span>{' '}
+                                <span className="material-qty">{m.quantity}</span>
+                              </li>
+                            ))
+                          )}
+                        </ul>
+                      </div>
+                      
+                    </div>
+                  </article>
+                )
+              })}
             </div>
           </section>
         ) : null}

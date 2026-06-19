@@ -462,3 +462,83 @@ button:hover {
     min-width: 0;
   }
 }
+
+/* Blueprint card styles */
+.blueprint-card {
+  background: rgba(15, 23, 42, 0.72);
+  padding: 0.75rem;
+}
+
+.blueprint-title {
+  margin: 0 0 0.5rem;
+  color: var(--color-primary);
+  font-size: 1rem;
+}
+
+.blueprint-card-body {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.materials-column {
+  flex: 1 1 55%;
+}
+
+.image-column {
+  flex: 0 0 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.blueprint-card-image {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.12);
+}
+
+.materials-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.4rem;
+}
+
+.material-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--color-text);
+}
+
+.material-icon {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+}
+
+.material-name {
+  color: var(--color-muted);
+  font-weight: 500;
+}
+
+.material-qty {
+  color: var(--color-primary);
+
+  font-weight: 700;
+}
+
+@media (max-width: 720px) {
+  .blueprint-card-body {
+    flex-direction: column-reverse;
+    gap: 0.75rem;
+  }
+
+  .image-column {
+    flex: 0 0 auto;
+  }
+}
