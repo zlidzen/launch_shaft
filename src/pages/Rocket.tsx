@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import RocketNav from '../components/rocketNav/RocketNav'
 import blueprintsData from '../../data/blueprints.ts'
 // @ts-ignore - import raw JSONL via Vite
@@ -41,52 +42,7 @@ const comparisonRows: ComparisonRow[] = [
   { type: '*Caldary Heavy Assault Missile', damage: 168, maxVelocity: 2950, explosionRadius: 55, explosionVelocity: 110 },
 ]
 
-type ShipEntry = {
-  id: number
-  name: string
-  role: string
-}
-
-const shipLists: Record<'frigates' | 'destroyers' | 'cruisers' | 'battle-cruisers', ShipEntry[]> = {
-  frigates: [
-    { id: 602, name: 'Kestrel', role: 'Classic Caldari missile frigate' },
-    { id: 598, name: 'Breacher', role: 'Brawling rocket frigate' },
-    { id: 583, name: 'Condor', role: 'Fast tackle missile frigate' },
-    { id: 17619, name: 'Caldari Navy Hookbill', role: 'Navy frigate with strong missile pressure' },
-    { id: 17930, name: 'Worm', role: 'Pirate frigate with strong drone and missile support' },
-    { id: 33816, name: 'Garmur', role: 'Long-range missile kiting frigate' },
-  ],
-  destroyers: [
-    { id: 32876, name: 'Corax', role: 'Caldari missile destroyer' },
-    { id: 32878, name: 'Talwar', role: 'Minmatar missile destroyer' },
-    { id: 34828, name: 'Jackdaw', role: 'Tactical destroyer with missile options' },
-    { id: 22452, name: 'Heretic', role: 'Interdictor that can fit missile launchers' },
-    { id: 42685, name: 'Sunesis', role: 'Flexible pirate destroyer hull' },
-  ],
-  cruisers: [
-    { id: 621, name: 'Caracal', role: 'Standard missile cruiser' },
-    { id: 17634, name: 'Caracal Navy Issue', role: 'Upgraded missile cruiser' },
-    { id: 29340, name: 'Osprey Navy Issue', role: 'Missile cruiser with strong range' },
-    { id: 11993, name: 'Cerberus', role: 'Heavy missile HAC' },
-    { id: 12019, name: 'Sacrilege', role: 'Heavy assault missile HAC' },
-    { id: 17715, name: 'Gila', role: 'Drone and missile cruiser with strong application' },
-  ],
-  'battle-cruisers': [
-    { id: 24698, name: 'Drake', role: 'Armored missile battlecruiser' },
-    { id: 24702, name: 'Hurricane', role: 'Versatile missile battlecruiser' },
-    { id: 24696, name: 'Harbinger', role: 'Long-range missile battlecruiser' },
-    { id: 22446, name: 'Vulture', role: 'Fast missile battlecruiser' },
-    { id: 624, name: 'Maller', role: 'Shield-tanked hybrid cruiser with missile fits' },
-    { id: 17843, name: 'Vexor Navy Issue', role: 'Drone and missile support battlecruiser' },
-  ],
-}
-
-const shipSectionTitles: Record<'frigates' | 'destroyers' | 'cruisers' | 'battle-cruisers', string> = {
-  frigates: 'Frigates',
-  destroyers: 'Destroyers',
-  cruisers: 'Cruisers',
-  'battle-cruisers': 'Battle Cruisers',
-}
+import { shipLists, shipSectionTitles } from '../data/shipLists'
 
 const Rocket = () => {
   const [activeSection, setActiveSection] = useState<RocketSection>('how-it-works')
@@ -334,17 +290,19 @@ const Rocket = () => {
             </p>
             <div className="ship-grid">
               {shipLists[activeShipSection].map((ship) => (
-                <article className="ship-card" key={ship.name}>
-                  {ship.id ? (
-                    <img
-                      className="ship-card-image"
-                      src={`https://images.evetech.net/types/${ship.id}/icon?size=128`}
-                      alt={`${ship.name} icon`}
-                    />
-                  ) : null}
-                  <h3>{ship.name}</h3>
-                  <p>{ship.role}</p>
-                </article>
+                <Link to={`/ship/${encodeURIComponent(ship.name)}`} key={ship.name} className="ship-card-link">
+                  <article className="ship-card">
+                    {ship.id ? (
+                      <img
+                        className="ship-card-image"
+                        src={`https://images.evetech.net/types/${ship.id}/icon?size=128`}
+                        alt={`${ship.name} icon`}
+                      />
+                    ) : null}
+                    <h3>{ship.name}</h3>
+                    <p>{ship.role}</p>
+                  </article>
+                </Link>
               ))}
             </div>
           </section>
