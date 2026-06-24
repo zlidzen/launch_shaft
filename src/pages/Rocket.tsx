@@ -232,13 +232,13 @@ const Rocket = () => {
               and run the job in a structure or station with the needed skills. The result is a finished module, ammo,
               or component ready for fitting.
             </p>
-            <p>
-              0. You have nothing.
-              1. You have a blueprint copy or original blueprint.
-              2. You get all needed materials for manufacturing.
-              3. You find a structure or station with the required skills and run the manufacturing job.
-              * if you have a blueprint original you may create blueprint copy with better material efficiency or better production time.
-            </p>
+            <ul>
+              <li>0. You have nothing.</li>
+              <li>1. You have a blueprint copy or original blueprint.</li>
+              <li>2. You get all needed materials for manufacturing.</li>
+              <li>3. You find a structure or station with the required skills and run the manufacturing job.</li>
+              <li>* if you have a blueprint original you may create blueprint copy with better material efficiency or better production time.</li>
+            </ul>
             <h3>Blueprints</h3>
             <p>
               Blueprints define the item output, required materials, and manufacturing time. A blueprint copy costs less

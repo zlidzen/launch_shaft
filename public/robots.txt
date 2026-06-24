@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://zlidzien.github.io/launch_shaft/sitemap.xml

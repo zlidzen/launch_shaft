@@ -279,7 +279,7 @@ button:hover {
 
 .page-rocket {
   display: grid;
-  grid-template-columns: minmax(220px, 300px) 1fr;
+  grid-template-columns: minmax(200px, 280px) 1fr;
   gap: 1.5rem;
   min-height: 60vh;
 }
