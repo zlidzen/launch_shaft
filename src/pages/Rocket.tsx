@@ -8,6 +8,7 @@ import blueprintsJsonl from '../../data/eve-online-static-data/blueprints.jsonl?
 type RocketSection =
   | 'how-it-works'
   | 'comparison-table'
+  | 'modules'
   | 'manufacture-how-it-works'
   | 'manufacture-recipes'
   | 'frigates'
@@ -43,6 +44,7 @@ const comparisonRows: ComparisonRow[] = [
 ]
 
 import { shipLists, shipSectionTitles } from '../data/shipLists'
+import { moduleLists, moduleSectionTitles } from '../data/moduleLists'
 
 const Rocket = () => {
   const [activeSection, setActiveSection] = useState<RocketSection>('how-it-works')
@@ -187,6 +189,41 @@ const Rocket = () => {
                   ))}
                 </tbody>
               </table>
+            </div>
+          </section>
+        ) : null}
+
+        {activeSection === 'modules' ? (
+          <section className="rocket-panel">
+            <h2>Modules</h2>
+            <p>Recommended modules for rockets and missiles.</p>
+            <div className="module-list">
+              {(['high_slot', 'mid_slot', 'low_slot', 'rig_slot', 'implant_slot', 'buster_slot'] as Array<keyof typeof moduleLists>).map((sectionKey) => {
+                const modules = moduleLists[sectionKey]
+
+                return (
+                  <article className="module-group" key={sectionKey}>
+                    <h3>{moduleSectionTitles[sectionKey]}</h3>
+                    {modules.length === 0 ? (
+                      <p>Items that upgrade rocket or missile characteristics.</p>
+                    ) : (
+                      <ul>
+                        {modules.map((item) => (
+                          <li key={item.id} className="material-item">
+                            {item.id ? (
+                              <img src={`https://images.evetech.net/types/${item.id}/icon?size=32`}
+                                  alt={`${item.name} icon`}
+                              />) : null}
+                            {' '}
+                            {item.name}
+                            {item.ammo && item.ammo !== 'none' ? ` — ${item.ammo}` : ''}
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </article>
+                )
+              })}
             </div>
           </section>
         ) : null}

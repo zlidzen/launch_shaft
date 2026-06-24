@@ -1,6 +1,7 @@
 type RocketSection =
   | 'how-it-works'
   | 'comparison-table'
+  | 'modules'
   | 'manufacture-how-it-works'
   | 'manufacture-recipes'
   | 'frigates'
@@ -66,7 +67,13 @@ const RocketNav = ({ activeSection, onSelectSection }: RocketNavProps) => {
         </button>
       </div>
 
-      <button type="button" className="rocket-nav-item">Modules</button>
+      <button
+        type="button"
+        className={activeSection === 'modules' ? 'rocket-nav-item active' : 'rocket-nav-item'}
+        onClick={() => onSelectSection('modules')}
+      >
+        Modules
+      </button>
       <button type="button" className="rocket-nav-item">PvE</button>
       <button type="button" className="rocket-nav-item">PvP</button>
 
