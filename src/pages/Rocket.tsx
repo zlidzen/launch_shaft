@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import RocketNav from '../components/rocketNav/RocketNav'
-import blueprintsData from '../../data/blueprints.ts'
-// @ts-ignore - import raw JSONL via Vite
-import blueprintsJsonl from '../../data/eve-online-static-data/blueprints.jsonl?raw'
+import { blueprintData } from '../data/blueprints'
+import { shipLists, shipSectionTitles } from '../data/shipLists'
+import { moduleLists, moduleSectionTitles } from '../data/moduleLists'
 
 type RocketSection =
   | 'how-it-works'
@@ -43,19 +43,8 @@ const comparisonRows: ComparisonRow[] = [
   { type: '*Caldary Heavy Assault Missile', damage: 168, maxVelocity: 2950, explosionRadius: 55, explosionVelocity: 110 },
 ]
 
-import { shipLists, shipSectionTitles } from '../data/shipLists'
-import { moduleLists, moduleSectionTitles } from '../data/moduleLists'
-
 const Rocket = () => {
   const [activeSection, setActiveSection] = useState<RocketSection>('how-it-works')
-  const parsedBlueprints = (() => {
-    try {
-      if (!blueprintsJsonl) return []
-      return blueprintsJsonl.trim().split('\n').map((line: string) => JSON.parse(line))
-    } catch (e) {
-      return []
-    }
-  })()
 
   const MATERIAL_NAMES: Record<number, string> = {
     34: 'Tritanium',
@@ -275,9 +264,9 @@ const Rocket = () => {
             <h2>Recipes</h2>
             <p>Blueprint collection for missile-related ships and components.</p>
             <div className="blueprint-grid">
-              {blueprintsData.map((blueprint: { id: number; name: string }) => {
-                const bpEntry = parsedBlueprints.find((b: any) => b.blueprintTypeID === blueprint.id)
-                const materials = bpEntry?.activities?.manufacturing?.materials ?? []
+              {blueprintData.map((blueprint: { id: number; name: string; materials: { typeID: number; quantity: number }[] }) => {
+                const bpEntry = blueprintData.find((b) => b.id === blueprint.id)
+                const materials = bpEntry?.materials ?? []
 
                 return (
                   <article className="blueprint-card" key={blueprint.name}>
@@ -290,7 +279,6 @@ const Rocket = () => {
                           alt={`${blueprint.name} icon`}
                         />
                       </div>
-
                       <div className="materials-column">
                         <ul className="materials-list">
                           {materials.length === 0 ? (
@@ -310,7 +298,6 @@ const Rocket = () => {
                           )}
                         </ul>
                       </div>
-                      
                     </div>
                   </article>
                 )
