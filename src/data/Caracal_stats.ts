@@ -47,21 +47,19 @@ type RawKillmail = {
 }
 
 const mapFlagToPosition = (flag: number): Position => {
-  switch (flag) {
-    case 11:
-      return Position.high
-    case 12:
-      return Position.mid
-    case 13:
+  switch (true) {
+    case flag >= 11 && flag <= 18:
       return Position.low
-    case 14:
+    case flag >= 20 && flag <= 26:
+      return Position.mid
+     case flag >=31 && flag <= 38:
+      return Position.high
+    case flag >= 92 && flag <= 94:
       return Position.rig
-    case 15:
+    case flag >= 41 && flag <= 48:
       return Position.subsystem
-    case 16:
+    case flag >= 87 && flag <= 89:
       return Position.droneBay
-    case 5:
-      return Position.cargo
     default:
       return Position.cargo
   }
@@ -106,3 +104,30 @@ export const caracalStats: CaracalStats = {
   shipsCollection: parseShipStats(rawKillmails as RawKillmail[]),
 }
 
+interface Item {
+  flag: number;
+  type_id: number;
+  quantity: number;
+}
+
+const summarizeItemsByPosition = (position: Position): { type_id: number; quantity: number }[] =>
+  Array.from(
+    caracalStats.shipsCollection
+      .flatMap(group => group.items)
+      .filter(item => item.position === position)
+      .reduce((map, item) => {
+        map.set(
+          item.type_id,
+          (map.get(item.type_id) ?? 0) + item.quantity
+        );
+        return map;
+      }, new Map<number, number>())
+  )
+    .map(([type_id, quantity]) => ({ type_id, quantity }))
+    .sort((a, b) => b.quantity - a.quantity)
+    .slice(0, 15);
+
+export const result_Hight = summarizeItemsByPosition(Position.high);
+
+export const sorted_Result = (position: Position): { type_id: number; quantity: number }[] =>
+  summarizeItemsByPosition(position);

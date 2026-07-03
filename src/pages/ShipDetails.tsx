@@ -1,5 +1,7 @@
 import { Link, useParams } from 'react-router-dom'
 import { shipLists } from '../data/shipLists'
+import { sorted_Result, Position } from '../data/Caracal_stats.ts'
+import { moduleLists } from '../data/moduleLists.ts'
 
 const ShipDetails = () => {
   const params = useParams()
@@ -81,30 +83,106 @@ const ShipDetails = () => {
         well with shield and propulsion modules to keep missiles on target.
       </p>
 
-      <h3>Example Fits</h3>
+      <h3>Fits Statistics:</h3>
+
       <section>
-        <h4>Kiting / Range Control</h4>
+        <h4>High Slot</h4>
         <ul>
-          {fits.kiting.map((mod) => (
-            <li key={mod}>{mod}</li>
+          {sorted_Result(Position.high).map(({ type_id, quantity }) => (
+            <li key={type_id}>
+              {type_id ? (
+              <img src={`https://images.evetech.net/types/${type_id}/icon?size=32`}
+              alt={`${moduleLists.high_slot.find(item => item.id === type_id)?.name} icon`}
+              />) : null}
+              {' '}
+              {moduleLists.high_slot.find(item => item.id === type_id)?.name}
+              {type_id} (Quantity: {quantity})
+              </li>
           ))}
         </ul>
       </section>
 
       <section>
-        <h4>Brawling / Close Range</h4>
+        <h4>Mid Slot</h4>
         <ul>
-          {fits.brawling.map((mod) => (
-            <li key={mod}>{mod}</li>
+          {sorted_Result(Position.mid).map(({ type_id, quantity }) => (
+            <li key={type_id}>
+              {type_id ? (
+              <img src={`https://images.evetech.net/types/${type_id}/icon?size=32`}
+              alt={`${moduleLists.high_slot.find(item => item.id === type_id)?.name} icon`}
+              />) : null}
+              {' '}
+              {moduleLists.high_slot.find(item => item.id === type_id)?.name}
+              {type_id} (Quantity: {quantity})
+              </li>
           ))}
         </ul>
       </section>
 
       <section>
-        <h4>PvE / Mission Fit</h4>
+        <h4>Low Slot</h4>
         <ul>
-          {fits.pve.map((mod) => (
-            <li key={mod}>{mod}</li>
+          {sorted_Result(Position.low).map(({ type_id, quantity }) => (
+            <li key={type_id}>
+              {type_id ? (
+              <img src={`https://images.evetech.net/types/${type_id}/icon?size=32`}
+              alt={`${moduleLists.high_slot.find(item => item.id === type_id)?.name} icon`}
+              />) : null}
+              {' '}
+              {moduleLists.high_slot.find(item => item.id === type_id)?.name}
+              {type_id} (Quantity: {quantity})
+              </li>
+          ))}
+        </ul>
+      </section>
+
+      <section>
+        <h4>Rigs Slot</h4>
+        <ul>
+          {sorted_Result(Position.rig).map(({ type_id, quantity }) => (
+            <li key={type_id}>
+              {type_id ? (
+              <img src={`https://images.evetech.net/types/${type_id}/icon?size=32`}
+              alt={`${moduleLists.high_slot.find(item => item.id === type_id)?.name} icon`}
+              />) : null}
+              {' '}
+              {moduleLists.high_slot.find(item => item.id === type_id)?.name}
+              {type_id} (Quantity: {quantity})
+              </li>
+          ))}
+        </ul>
+      </section>
+
+        <section>
+        <h4>Drone Bay</h4>
+        <ul>
+          {sorted_Result(Position.droneBay).map(({ type_id, quantity }) => (
+            <li key={type_id}>
+              {type_id ? (
+              <img src={`https://images.evetech.net/types/${type_id}/icon?size=32`}
+              alt={`${moduleLists.high_slot.find(item => item.id === type_id)?.name} icon`}
+              />) : null}
+              {' '}
+              {moduleLists.high_slot.find(item => item.id === type_id)?.name}
+              {type_id} (Quantity: {quantity})
+              </li>
+          ))}
+        </ul>
+      </section>
+
+      <section>
+        <h4>Cargo</h4>
+        <ul>
+          {sorted_Result(Position.cargo).map(({ type_id, quantity }) => (
+            <li key={type_id}>
+              {type_id ? (
+              <img src={`https://images.evetech.net/types/${type_id}/icon?size=32`}
+              alt={`${moduleLists.high_slot.find(item => item.id === type_id)?.name} icon`}
+              />) : null}
+              {' '}
+              {moduleLists.high_slot.find(item => item.id === type_id)?.name}
+              {type_id} (Quantity: {quantity})
+              </li>
           ))}
         </ul>
       </section>
