@@ -32,39 +32,6 @@ const ShipDetails = () => {
     )
   }
 
-  // Example descriptive content and fits for Caracal (and similar cruisers)
-  const fits = {
-    kiting: [
-      '450mm AutoCannon II',
-      '1600mm Rolled Tungsten Barrel I',
-      'Ballistic Control System II',
-      '100MN Afterburner II',
-      'Large Shield Extender II',
-      'EM Shield Hardener II',
-      'Medium Core Defense Field Extender I',
-      'Heavy Missile Launcher II x4 (Scourge/Hail)',
-      'Sisters Core Probe Launcher',
-    ],
-    brawling: [
-      'Ballistic Control System II',
-      'Damage Control II',
-      'Large Shield Extender II',
-      '100MN Afterburner II',
-      'Warp Disruptor II',
-      'Heavy Missile Launcher II x4 (Scourge/Hail)',
-      'Light Missile Launcher II x2 (for drones/utility)',
-    ],
-    pve: [
-      'Ballistic Control System II',
-      'Large Shield Extender II',
-      'Shield Power Relay II',
-      '100MN Afterburner II',
-      'Heavy Missile Launcher II x4 (Hail/Scourge)',
-      'Target Painter II',
-      'ECCM II',
-    ],
-  }
-
   return (
     <section className="page page-ship-details">
       <h2>{ship.name}</h2>
