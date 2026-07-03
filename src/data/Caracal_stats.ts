@@ -104,12 +104,6 @@ export const caracalStats: CaracalStats = {
   shipsCollection: parseShipStats(rawKillmails as RawKillmail[]),
 }
 
-interface Item {
-  flag: number;
-  type_id: number;
-  quantity: number;
-}
-
 const summarizeItemsByPosition = (position: Position): { type_id: number; quantity: number }[] =>
   Array.from(
     caracalStats.shipsCollection
