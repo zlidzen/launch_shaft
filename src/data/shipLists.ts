@@ -4,7 +4,9 @@ export type ShipEntry = {
   role: string
 }
 
-export const shipLists: Record<'frigates' | 'destroyers' | 'cruisers' | 'battle-cruisers', ShipEntry[]> = {
+export type shipSectionType = 'frigates' | 'destroyers' | 'cruisers' | 'battlecruisers'
+
+export const shipLists: Record<shipSectionType, ShipEntry[]> = {
   frigates: [
     { id: 602, name: 'Kestrel', role: 'Classic Caldari missile frigate' },
     { id: 598, name: 'Breacher', role: 'Brawling rocket frigate' },
@@ -27,7 +29,7 @@ export const shipLists: Record<'frigates' | 'destroyers' | 'cruisers' | 'battle-
     { id: 11993, name: 'Cerberus', role: 'Heavy missile HAC' },
     { id: 17715, name: 'Gila', role: 'Drone and missile cruiser with strong application' },
   ],
-  'battle-cruisers': [
+  battlecruisers: [
     { id: 24698, name: 'Drake', role: 'Armored missile battlecruiser' },
     { id: 24702, name: 'Hurricane', role: 'Versatile missile battlecruiser' },
     { id: 24696, name: 'Harbinger', role: 'Long-range missile battlecruiser' },
@@ -37,9 +39,16 @@ export const shipLists: Record<'frigates' | 'destroyers' | 'cruisers' | 'battle-
   ],
 }
 
-export const shipSectionTitles: Record<'frigates' | 'destroyers' | 'cruisers' | 'battle-cruisers', string> = {
+export const shipSectionTitles: Record<shipSectionType, string> = {
   frigates: 'Frigates',
   destroyers: 'Destroyers',
   cruisers: 'Cruisers',
-  'battle-cruisers': 'Battle Cruisers',
+  battlecruisers: 'Battle Cruisers',
+}
+
+export const shipSectionSpeedAndSignature: Record<shipSectionType, string> = {
+  frigates: 'speed: 200 m/s, signature: 50 m',
+  destroyers: 'speed: 150 m/s, signature: 100 m',
+  cruisers: 'speed: 120 m/s, signature: 150 m',
+  battlecruisers: 'speed: 100 m/s, signature: 200 m',
 }
