@@ -15,9 +15,9 @@ export const shipLists: Record<'frigates' | 'destroyers' | 'cruisers' | 'battle-
   ],
   destroyers: [
     { id: 32876, name: 'Corax', role: 'Caldari missile destroyer' },
+    { id: 91857, name: 'Corax Navy Issue', role: 'Navy destroyer with strong missile pressure' },
     { id: 32878, name: 'Talwar', role: 'Minmatar missile destroyer' },
-    { id: 34828, name: 'Jackdaw', role: 'Tactical destroyer with missile options' },
-    { id: 22452, name: 'Heretic', role: 'Interdictor that can fit missile launchers' },
+    { id: 91858, name: 'Talwar Fleet Issue', role: 'Fleet issue missile destroyer' },
     { id: 42685, name: 'Sunesis', role: 'Flexible pirate destroyer hull' },
   ],
   cruisers: [
@@ -25,7 +25,6 @@ export const shipLists: Record<'frigates' | 'destroyers' | 'cruisers' | 'battle-
     { id: 17634, name: 'Caracal Navy Issue', role: 'Upgraded missile cruiser' },
     { id: 29340, name: 'Osprey Navy Issue', role: 'Missile cruiser with strong range' },
     { id: 11993, name: 'Cerberus', role: 'Heavy missile HAC' },
-    { id: 12019, name: 'Sacrilege', role: 'Heavy assault missile HAC' },
     { id: 17715, name: 'Gila', role: 'Drone and missile cruiser with strong application' },
   ],
   'battle-cruisers': [
