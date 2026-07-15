@@ -1,0 +1,1 @@
+import{t as e}from"./jsx-runtime-BLlJT2pm.js";var t=e(),n=()=>(0,t.jsx)(`section`,{className:`page page-about`,children:(0,t.jsx)(`textarea`,{className:`about-textarea`,placeholder:`About page text will be provided later.`,defaultValue:``})});export{n as default};
