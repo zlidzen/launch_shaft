@@ -4,31 +4,11 @@ import type { ShipSectionType } from './rocketSectionTypes'
 
 type ActiveShipSectionProps = {
   activeShipSection: ShipSectionType
-  onSelectShipSection?: (section: ShipSectionType) => void
 }
 
-const shipSectionOptions: Array<{ value: ShipSectionType; label: string }> = [
-  { value: 'frigates', label: 'Frigates' },
-  { value: 'destroyers', label: 'Destroyers' },
-  { value: 'cruisers', label: 'Cruisers' },
-  { value: 'battlecruisers', label: 'Battle Cruisers' },
-]
-
-const ActiveShipSection = ({ activeShipSection, onSelectShipSection }: ActiveShipSectionProps) => {
+const ActiveShipSection = ({ activeShipSection }: ActiveShipSectionProps) => {
   return (
     <section className="rocket-panel">
-      <div className="rocket-subnav" aria-label="Ship class filters">
-        {shipSectionOptions.map((option) => (
-          <button
-            key={option.value}
-            type="button"
-            className={activeShipSection === option.value ? 'rocket-nav-item rocket-nav-child active' : 'rocket-nav-item rocket-nav-child'}
-            onClick={() => onSelectShipSection?.(option.value)}
-          >
-            {option.label}
-          </button>
-        ))}
-      </div>
       <h2>{shipSectionTitles[activeShipSection]}</h2>
       <p>Examples of EVE Online ships in this class that can be fitted with rocket or missile launchers.</p>
       <p>* Base parameters: {shipSectionSpeedAndSignature[activeShipSection]}</p>

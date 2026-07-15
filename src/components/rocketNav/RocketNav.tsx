@@ -1,20 +1,20 @@
+import type { ShipSectionType } from '../rocketSection/rocketSectionTypes'
+
 type RocketSection =
   | 'how-it-works'
   | 'comparison-table'
   | 'modules'
   | 'manufacture-how-it-works'
   | 'manufacture-recipes'
-  | 'frigates'
-  | 'destroyers'
-  | 'cruisers'
-  | 'battle-cruisers'
+  | 'ships'
 
 type RocketNavProps = {
   activeSection: RocketSection
-  onSelectSection: (section: RocketSection) => void
+  activeShipSection: ShipSectionType
+  onSelectSection: (section: RocketSection, shipSection?: ShipSectionType) => void
 }
 
-const RocketNav = ({ activeSection, onSelectSection }: RocketNavProps) => {
+const RocketNav = ({ activeSection, activeShipSection, onSelectSection }: RocketNavProps) => {
   return (
     <aside className="rocket-nav" aria-label="Rocket categories">
       <p className="rocket-nav-label">Missiles</p>
@@ -39,29 +39,29 @@ const RocketNav = ({ activeSection, onSelectSection }: RocketNavProps) => {
       <div className="rocket-subnav" aria-label="Ship subsections">
         <button
           type="button"
-          className={activeSection === 'frigates' ? 'rocket-nav-item rocket-nav-child active' : 'rocket-nav-item rocket-nav-child'}
-          onClick={() => onSelectSection('frigates')}
+          className={activeSection === 'ships' && activeShipSection === 'frigates' ? 'rocket-nav-item rocket-nav-child active' : 'rocket-nav-item rocket-nav-child'}
+          onClick={() => onSelectSection('ships', 'frigates')}
         >
           Frigates
         </button>
         <button
           type="button"
-          className={activeSection === 'destroyers' ? 'rocket-nav-item rocket-nav-child active' : 'rocket-nav-item rocket-nav-child'}
-          onClick={() => onSelectSection('destroyers')}
+          className={activeSection === 'ships' && activeShipSection === 'destroyers' ? 'rocket-nav-item rocket-nav-child active' : 'rocket-nav-item rocket-nav-child'}
+          onClick={() => onSelectSection('ships', 'destroyers')}
         >
           Destroyers
         </button>
         <button
           type="button"
-          className={activeSection === 'cruisers' ? 'rocket-nav-item rocket-nav-child active' : 'rocket-nav-item rocket-nav-child'}
-          onClick={() => onSelectSection('cruisers')}
+          className={activeSection === 'ships' && activeShipSection === 'cruisers' ? 'rocket-nav-item rocket-nav-child active' : 'rocket-nav-item rocket-nav-child'}
+          onClick={() => onSelectSection('ships', 'cruisers')}
         >
           Cruisers
         </button>
         <button
           type="button"
-          className={activeSection === 'battle-cruisers' ? 'rocket-nav-item rocket-nav-child active' : 'rocket-nav-item rocket-nav-child'}
-          onClick={() => onSelectSection('battle-cruisers')}
+          className={activeSection === 'ships' && activeShipSection === 'battlecruisers' ? 'rocket-nav-item rocket-nav-child active' : 'rocket-nav-item rocket-nav-child'}
+          onClick={() => onSelectSection('ships', 'battlecruisers')}
         >
           Battle Cruisers
         </button>

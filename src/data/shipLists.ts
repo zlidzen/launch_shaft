@@ -26,7 +26,6 @@ export const shipLists: Record<shipSectionType, ShipEntry[]> = {
     { id: 621, name: 'Caracal', role: 'Standard missile cruiser' },
     { id: 17634, name: 'Caracal Navy Issue', role: 'Upgraded missile cruiser' },
     { id: 29340, name: 'Osprey Navy Issue', role: 'Missile cruiser with strong range' },
-    { id: 11993, name: 'Cerberus', role: 'Heavy missile HAC' },
     { id: 17715, name: 'Gila', role: 'Drone and missile cruiser with strong application' },
   ],
   battlecruisers: [
