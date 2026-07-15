@@ -1,0 +1,90 @@
+name: Update zKillboard Caracal data
+
+on:
+  schedule:
+    - cron: '0 0 * * 0'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update-data:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Switch to Release branch
+        run: |
+          git fetch origin Release || true
+          if git show-ref --verify --quiet refs/remotes/origin/Release; then
+            git checkout -B Release origin/Release
+          else
+            git checkout -B Release
+          fi
+
+      - name: Download zKillboard payload
+        run: |
+          mkdir -p data
+          curl -fsSL \
+            -H "Accept: application/json" \
+            -o data/zkb_raw_caracal.json \
+            https://zkillboard.com/api/shipTypeID/621/
+
+      - name: Validate JSON payload
+        run: |
+          python - <<'PY'
+          import json
+          from datetime import datetime, timedelta, timezone
+          from pathlib import Path
+
+          path = Path('data/zkb_raw_caracal.json')
+          with path.open(encoding='utf-8') as fh:
+              payload = json.load(fh)
+
+          cutoff = datetime.now(timezone.utc) - timedelta(days=30)
+          filtered = []
+
+          for item in payload if isinstance(payload, list) else []:
+              killmail_time = item.get('killmail_time')
+              if not killmail_time:
+                  continue
+              try:
+                  item_time = datetime.fromisoformat(killmail_time.replace('Z', '+00:00'))
+              except ValueError:
+                  continue
+              if item_time.astimezone(timezone.utc) >= cutoff:
+                  filtered_item = dict(item)
+                  filtered_item.pop('attackers', None)
+
+                  victim = filtered_item.get('victim')
+                  if isinstance(victim, dict):
+                      victim = dict(victim)
+                      victim['ship_type_id'] = 621
+                      filtered_item['victim'] = victim
+
+                  filtered.append(filtered_item)
+
+          with path.open('w', encoding='utf-8') as fh:
+              json.dump(filtered, fh, indent=2)
+              fh.write('\n')
+
+          print(f'Validated and filtered JSON payload in {path}')
+          PY
+
+      - name: Commit and push changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          if git status --porcelain -- data/zkb_raw_caracal.json | grep -q .; then
+            git add data/zkb_raw_caracal.json
+            git commit -m "chore: update zkb raw caracal data"
+            git push origin HEAD:Release
+          else
+            echo "No changes detected."
+          fi
