@@ -1,6 +1,8 @@
 name: Update zKillboard Caracal data
 
 on:
+  branches:
+    - release
   schedule:
     - cron: '0 0 * * 0'
   workflow_dispatch:
